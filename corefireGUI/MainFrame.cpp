@@ -5,12 +5,6 @@ enum class IDs : int {
 	BUTTON_ID = 2, SLIDER_ID = 3, TEXT_ID = 4
 };
 
-wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-	EVT_BUTTON(static_cast<int>(IDs::BUTTON_ID), MainFrame::onButtonClick)
-	EVT_SLIDER(static_cast<int>(IDs::SLIDER_ID), MainFrame::onSliderChange)
-	EVT_TEXT(static_cast<int>(IDs::TEXT_ID), MainFrame::onTextChange)
-
-wxEND_EVENT_TABLE()
 
 static constexpr const char* toString(IDs id) noexcept {
     switch (id) {
@@ -30,8 +24,13 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(NULL, wxID_ANY, title)
 	wxSlider* slider = new wxSlider(panel, static_cast<int>(IDs::SLIDER_ID), 0, 0, 100, wxPoint(300, 200), wxSize(200, -1));
 	wxTextCtrl* text = new wxTextCtrl(panel, static_cast<int>(IDs::TEXT_ID), "Hello World", wxPoint(300, 375), wxSize(200, -1));
 
-	CreateStatusBar();
+	button->Bind(wxEVT_BUTTON, &MainFrame::onButtonClick, this);
+	slider->Bind(wxEVT_SLIDER, &MainFrame::onSliderChange, this);
+	text->Bind(wxEVT_TEXT, &MainFrame::onTextChange, this);
 
+	button->Unbind(wxEVT_BUTTON, &MainFrame::onButtonClick, this);
+
+	CreateStatusBar();
 }
 
 void MainFrame::onButtonClick(wxCommandEvent& event)
