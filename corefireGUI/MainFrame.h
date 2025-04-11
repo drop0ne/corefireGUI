@@ -10,5 +10,6 @@ private:
 	void onButton1Click(wxCommandEvent& event);
 	void onButton2Click(wxCommandEvent& event);
 	void onClose(wxCloseEvent& event);
+	void onMouseEvent(wxMouseEvent& event);
 };
 

@@ -27,6 +27,12 @@ MainFrame::MainFrame(const wxString& title) : wxFrame(NULL, wxID_ANY, title)
 	button2->Bind(wxEVT_BUTTON, &MainFrame::onButton2Click, this);
 
 	CreateStatusBar();
+
+	/* MOUSE EVENT */
+
+	panel->Bind(wxEVT_LEFT_DOWN, &MainFrame::onMouseEvent, this);
+
+
 }
 
 void MainFrame::onAnyClick(wxCommandEvent& event)
@@ -48,6 +54,12 @@ void MainFrame::onButton2Click(wxCommandEvent& event)
 void MainFrame::onClose(wxCloseEvent& event)
 {
 	wxLogMessage("Closing the application.");
-	event.Skip();  // passes theevent to the base class to handle the event
-	// or this->Destroy();
+	this->Destroy();
+}
+
+void MainFrame::onMouseEvent(wxMouseEvent& event)
+{
+	wxPoint mousePosition = event.GetPosition();
+	wxString message = wxString::Format("Mouse Event Detected! (x=%d y=%d)", mousePosition.x, mousePosition.y);
+	wxLogStatus(message);
 }
