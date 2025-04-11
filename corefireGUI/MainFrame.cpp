@@ -7,6 +7,8 @@ enum class IDs : int {
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_BUTTON(static_cast<int>(IDs::BUTTON_ID), MainFrame::onButtonClick)
+	EVT_SLIDER(static_cast<int>(IDs::SLIDER_ID), MainFrame::onSliderChange)
+	EVT_TEXT(static_cast<int>(IDs::TEXT_ID), MainFrame::onTextChange)
 
 wxEND_EVENT_TABLE()
 
@@ -39,8 +41,12 @@ void MainFrame::onButtonClick(wxCommandEvent& event)
 
 void MainFrame::onSliderChange(wxCommandEvent& event)
 {
+	wxString message = wxString::Format("Slider value: %d", event.GetInt());
+	wxLogStatus(message);
 }
 
 void MainFrame::onTextChange(wxCommandEvent& event)
 {
+	wxString message = wxString::Format("Text changed: %s", event.GetString());
+	wxLogStatus(message);
 }
