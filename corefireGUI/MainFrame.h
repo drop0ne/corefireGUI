@@ -6,8 +6,9 @@ class MainFrame : public wxFrame
 	public:
 	MainFrame(const wxString& title);
 private:
-	void onButtonClick(wxCommandEvent& event);
-	void onSliderChange(wxCommandEvent& event);
-	void onTextChange(wxCommandEvent& event);
+	void onAnyClick(wxCommandEvent& event);
+	void onButton1Click(wxCommandEvent& event);
+	void onButton2Click(wxCommandEvent& event);
+	void onClose(wxCloseEvent& event);
 };
 
